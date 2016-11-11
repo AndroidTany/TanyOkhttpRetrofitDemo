@@ -40,6 +40,7 @@ public class Main2Activity extends BaseActivity {
         });
     }
 
+    //int类型
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(MsgEvent.MessageInts event){
         Log.i("-->", "Main2 onEvent" + event.num);
