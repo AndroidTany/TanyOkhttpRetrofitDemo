@@ -40,10 +40,10 @@ public class Main2Activity extends BaseActivity {
         });
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEvent(MsgEvent.MessageInts event){
-        Log.i("-->", "Main2 onEvent" + event.num);
-    }
+//    @Subscribe(threadMode = ThreadMode.MAIN)
+//    public void onEvent(MsgEvent.MessageInts event){
+//        Log.i("-->", "Main2 onEvent" + event.num);
+//    }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(MsgEvent.MyMsg event){

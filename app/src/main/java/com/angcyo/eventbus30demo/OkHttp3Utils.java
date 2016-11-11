@@ -69,6 +69,7 @@ public class OkHttp3Utils {
 
     /**
      * 设置连接器  设置缓存
+     * tany
      */
     public static Interceptor getNetWorkInterceptor (){
         return new Interceptor() {
