@@ -74,6 +74,12 @@ public class MainActivity extends BaseActivity {
                 EventBus.getDefault().postSticky(new MsgEvent.MyMsg("MDZZ"));
             }
         });
+        imgIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                start(MoreTab2Activity.class);
+            }
+        });
 
         Call<Repo> repos = NetWorks.service.listrepo(1,100);//请求参数
         repos.enqueue(new Callback<Repo>() {
@@ -81,17 +87,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onResponse(Call<Repo> call, Response<Repo> response) {
                 Repo repo = response.body();
-                ImageLoader.loadStringRes(imgIcon,repo.getData().get(0).getOriginalImg(),config1,new LoaderListener(){
-                    @Override
-                    public void onSuccess() {
-
-                    }
-
-                    @Override
-                    public void onError() {
-
-                    }
-                });
+                ImageLoader.loadStringRes(imgIcon,repo.getData().get(0).getOriginalImg(),config1,null);
             }
 
             @Override
