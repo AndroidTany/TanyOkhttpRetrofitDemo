@@ -1,10 +1,13 @@
 package com.angcyo.eventbus30demo;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.WindowManager;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -15,6 +18,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EventBus.getDefault().register(this);
+        initWindow();
         l();
     }
 
@@ -46,4 +50,27 @@ public abstract class BaseActivity extends AppCompatActivity {
         final Intent intent = new Intent(this, activity);
         startActivity(intent);
     }
+
+    /**
+     * 是否设置沉浸式
+     *
+     * @return
+     */
+    protected boolean isSetStatusBar() {
+        return false;
+    }
+
+
+    @TargetApi(19)
+    private void initWindow() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && isSetStatusBar()) {
+            getWindow().addFlags(
+                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            tintManager = new SystemBarTintManager(this);
+            tintManager.setStatusBarTintEnabled(true);
+            tintManager.setStatusBarTintResource(R.color.colorAccent);
+        }
+    }
+
+    private SystemBarTintManager tintManager;
 }

@@ -13,16 +13,16 @@ import rx.Observable;
 public class NetWorks extends RetrofitUtils{
 
     //创建实现接口调用
-    protected static final NetService service = getRetrofit().create(NetService.class);
+    public static final NetService service = getRetrofit().create(NetService.class);
     //设缓存有效期为1天
-    protected static final long CACHE_STALE_SEC = 60 * 60 * 24 * 1;
+    public static final long CACHE_STALE_SEC = 60 * 60 * 24 * 1;
     //查询缓存的Cache-Control设置，使用缓存
-    protected static final String CACHE_CONTROL_CACHE = "only-if-cached, max-stale=" + CACHE_STALE_SEC;
+    public static final String CACHE_CONTROL_CACHE = "only-if-cached, max-stale=" + CACHE_STALE_SEC;
     //查询网络的Cache-Control设置。不使用缓存
-    protected static final String CACHE_CONTROL_NETWORK = "max-age=0";
+    public static final String CACHE_CONTROL_NETWORK = "max-age=0";
 
 
-    public static interface NetService {
+    public interface NetService {
 
         //GET请求，设置缓存
         @Headers("Cache-Control: public," + CACHE_CONTROL_CACHE)
@@ -31,5 +31,8 @@ public class NetWorks extends RetrofitUtils{
 
         @GET("Sale/groupBy/pageNo/{pageno}/pageSize/{pagesize}")
         Call<Repo> listrepo(@Path("pageno") int pageNo, @Path("pagesize") int pageSize);
+
+        @GET("Goods/indexRecommend/pageNo/{no}/pageSize/{size}")
+        Call<StoreBean> indexRecommend(@Path("no") int no, @Path("size") int size);
     }
 }

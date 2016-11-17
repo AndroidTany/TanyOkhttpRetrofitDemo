@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import com.angcyo.eventbus30demo.ImageUtils.ImageLoadConfig;
 import com.angcyo.eventbus30demo.ImageUtils.ImageLoader;
-import com.angcyo.eventbus30demo.ImageUtils.LoaderListener;
 import com.bumptech.glide.request.animation.ViewPropertyAnimation;
 
 import org.greenrobot.eventbus.EventBus;
@@ -55,7 +54,7 @@ public class MainActivity extends BaseActivity {
             setDiskCacheStrategy(ImageLoadConfig.DiskCache.ALL).
             setRoundedCorners(false).
             setAsBitmap(true).
-                setAnimator(animationObject1).
+                setAnimator(null).
                     setBlur(true).
                     build();
 
@@ -106,5 +105,10 @@ public class MainActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         unbinder.unbind();
+    }
+
+    @Override
+    protected boolean isSetStatusBar() {
+        return true;
     }
 }
